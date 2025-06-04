@@ -1,19 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 
-Route::get('/', function () {
-  return view('home');
-});
-Route::get('/post', function () {
-  return view('post.index');
-});
-Route::get('/post/show/{id}', function () {
-  return view('post.show');
-});
-Route::get('/post/create', function () {
-  return view('post.create');
-});
-Route::get('/post/edit/{id}', function () {
-  return view('post.edit');
-});
+Route::get('/', [HomeController::class, 'index']);
+
+Route::get('/post', [PostController::class, 'index']);
+
+Route::get('/post/show/{id}', [PostController::class, 'getPostById']);
+
+Route::get('/post/create', [PostController::class, 'create']);
+
+Route::get('/post/edit/{id}', [PostController::class, 'edit']);
