@@ -7,13 +7,13 @@
 
         <div class="mt-6">
             @foreach ($posts as $post)
-                <div class="post border border-gray-300 dark:border-gray-700 p-4 my-5 rounded-lg shadow-lg w-full">
-                    <h2 class="">{{ $post->title }}</h2>
-                    <p>{{ $post->content }}</p>
-                    <p class="text-sm text-gray-500">Publicado por: {{ $post->user->name }}</p>
+                <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full ">
+                    <h3 class="!text-xl mt-4 text-gray-500">{{ $post->user->name }} </h3>
+                    <h2 class="!text-2xl mt-4">{{ $post->title }}</h2>
+                    <p class="mt-4">{{ $post->content }}</p>
                     @if ($post->image)
                         <img src="{{ $post->image }}" alt="{{ $post->title }}"
-                            class="mt-2 w-full max-w-sm rounded-md shadow" />
+                            class="mt-4 w-1/2 max-w-sm rounded-md shadow mx-auto block">
                     @endif
                 </div>
             @endforeach
