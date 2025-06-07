@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Http;
 
 class PostController extends Controller
 {
+
   /**
    * Display a listing of the resource.
    */
@@ -21,6 +22,12 @@ class PostController extends Controller
   {
     $posts = Post::with('user')->latest()->paginate(5); // Agrega paginación en home-auth
     return view('home-auth', compact('posts'));
+  }
+
+  public function userPosts()
+  {
+    $posts = Post::where('user_id', Auth::id())->latest()->paginate(5);
+    return view('post.user', compact('posts'));
   }
 
   /**
@@ -94,20 +101,54 @@ class PostController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id)
+  public function edit(Post $post)
   {
-    // Here you would typically fetch the post by ID from the database.
-    // For now, we'll just return a view with the post ID.
-    return view('post.edit', ['id' => $id]);
+    return view('post.edit', compact('post'));
   }
 
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, string $id)
+  public function update(Request $request, Post $post)
   {
-    //
+    // Validar los datos ingresados
+    $request->validate([
+      'title' => 'required|string|max:255',
+      'content' => 'required|string',
+      'image' => 'nullable|image|max:2048', // Permite imágenes opcionales
+    ]);
+
+    $imageUrl = $post->image; // Mantiene la imagen actual si no se sube una nueva
+
+    // Subir la nueva imagen si el usuario adjunta una
+    if ($request->hasFile('image')) {
+      $imageFile = $request->file('image')->path();
+
+      // Hacer la solicitud a ImgBB
+      $response = Http::attach(
+        'image',
+        file_get_contents($imageFile),
+        $request->file('image')->getClientOriginalName()
+      )->post("https://api.imgbb.com/1/upload", [
+        'key' => env('IMGBB_API_KEY'),
+      ]);
+
+      // Si la subida fue exitosa, obtener la nueva URL de la imagen
+      if ($response->successful()) {
+        $imageUrl = $response->json('data.url');
+      } else {
+        return back()->withErrors(['image' => 'Error al subir la imagen a ImgBB.']);
+      }
+    }
+
+    // Actualizar el post con los nuevos datos
+    $post->update([
+      'title' => $request->title,
+      'content' => $request->content,
+      'image' => $imageUrl, // Usa la nueva imagen si se subió, o mantiene la existente
+    ]);
+
+    return redirect()->route('posts.user')->with('success', 'Post actualizado correctamente.');
   }
+
+
 
   /**
    * Remove the specified resource from storage.
