@@ -6,15 +6,19 @@
 
 
         <div class="mt-6">
-            @foreach ($posts as $post)
-                <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full ">
-                    <h2 class="!text-2xl mt-4">
-                        <a href="{{ route('posts.show', $post->id) }}" class="text-indigo-500 hover:underline">
-                            {{ $post->title }}
-                        </a>
-                    </h2>
-                </div>
-            @endforeach
+            @if ($posts->isEmpty())
+                <p class="text-center text-gray-400 text-lg">No hay publicaciones aún. ¡Sé el primero en crear una!</p>
+            @else
+                @foreach ($posts as $post)
+                    <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full">
+                        <h2 class="!text-2xl mt-4">
+                            <a href="{{ route('posts.show', $post->id) }}" class="text-indigo-500 hover:underline">
+                                {{ $post->title }}
+                            </a>
+                        </h2>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 @endsection

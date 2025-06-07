@@ -53,16 +53,25 @@
         class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
             <div class="container w-full text-white flex flex-col gap-4 p-4 lg:p-8">
-                @foreach ($posts as $post)
-                    <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full">
-                        <p class="!text-sm dark:text-gray-400">{{ $post->user->name }}</p>
-                        <h2 class="!text-2xl mt-4">
-                            <a href="{{ route('posts.show', $post->id) }}" class="text-indigo-500 hover:underline">
-                                {{ $post->title }}
-                            </a>
-                        </h2>
-                    </div>
-                @endforeach
+                <div class="container w-full text-white flex flex-col gap-4 p-4 lg:p-8">
+                    @if ($posts->isEmpty())
+                        <p class="text-center dark:text-gray-400 text-lg">No hay publicaciones disponibles en este
+                            momento.
+                        </p>
+                    @else
+                        @foreach ($posts as $post)
+                            <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full">
+                                <p class="!text-sm dark:text-gray-400">{{ $post->user->name }}</p>
+                                <h2 class="!text-2xl mt-4">
+                                    <a href="{{ route('posts.show', $post->id) }}"
+                                        class="text-indigo-500 hover:underline">
+                                        {{ $post->title }}
+                                    </a>
+                                </h2>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
 
             </div>
         </main>
