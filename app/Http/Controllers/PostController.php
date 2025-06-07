@@ -12,16 +12,14 @@ class PostController extends Controller
   /**
    * Display a listing of the resource.
    */
-
   public function index()
   {
-    $posts = Post::with('user')->get();
+    $posts = Post::with('user')->latest()->paginate(5); // Muestra 5 posts por página
     return view('home', compact('posts'));
   }
-
   public function getPosts()
   {
-    $posts = Post::all(); // Recupera todos los posts
+    $posts = Post::with('user')->latest()->paginate(5); // Agrega paginación en home-auth
     return view('home-auth', compact('posts'));
   }
 

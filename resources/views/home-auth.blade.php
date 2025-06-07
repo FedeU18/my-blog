@@ -21,6 +21,12 @@
                     </div>
                 @endforeach
             @endif
+            <!-- Enlaces de paginación -->
+            <div class="my-8 flex justify-center">
+                {{ $posts->links() }} <!-- Laravel genera los enlaces automáticamente -->
+            </div>
+
         </div>
+
     </div>
 @endsection

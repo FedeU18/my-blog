@@ -71,6 +71,11 @@
                             </div>
                         @endforeach
                     @endif
+                    <!-- Enlaces de paginación -->
+                    <div class="mt-8 flex justify-center">
+                        {{ $posts->links() }} <!-- Laravel genera los enlaces automáticamente -->
+                    </div>
+
                 </div>
 
             </div>
