@@ -15,7 +15,7 @@ class PostController extends Controller
 
   public function index()
   {
-    $posts = Post::all(); // Recupera todos los posts
+    $posts = Post::with('user')->get();
     return view('home', compact('posts'));
   }
 
@@ -36,9 +36,6 @@ class PostController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-
-
-
 
 
 

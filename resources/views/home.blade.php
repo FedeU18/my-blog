@@ -18,27 +18,33 @@
 </head>
 
 <body class="bg-[#FDFDFC] dark:bg-gray-900 text-[#1b1b18] flex items-center lg:justify-center min-h-screen flex-col">
-    <header class="w-full p-2 text-sm mb-6 not-has-[nav]:hidden bg-gray-800">
+    <header
+        class="w-full p-2 text-sm mb-6 not-has-[nav]:hidden bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
         @if (Route::has('login'))
-            <nav class="flex items-center justify-end gap-4">
-                @auth
-                    <a href="{{ url('/dashboard') }}"
-                        class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                        Dashboard
-                    </a>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal">
-                        Log in
-                    </a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
+            <nav class="flex items-center justify-between gap-4 px-4">
+                <div class="shrink-0 flex items-center pl-4">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-16 w-auto">
+                </div>
+                <div class="flex items-center gap-4">
+                    @auth
+                        <a href="{{ url('/home-auth') }}"
                             class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
-                            Register
+                            Home
                         </a>
-                    @endif
-                @endauth
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal">
+                            Log in
+                        </a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                                Register
+                            </a>
+                        @endif
+                    @endauth
+                </div>
             </nav>
         @endif
     </header>
@@ -51,6 +57,7 @@
                     <div class="post border border-gray-300 dark:border-gray-700 p-4 rounded-lg shadow-lg w-full">
                         <h2 class="">{{ $post->title }}</h2>
                         <p>{{ $post->content }}</p>
+                        <p class="text-sm text-gray-500">Publicado por: {{ $post->user->name }}</p>
                         @if ($post->image)
                             <img src="{{ $post->image }}" alt="{{ $post->title }}"
                                 class="mt-2 w-full max-w-sm rounded-md shadow" />
