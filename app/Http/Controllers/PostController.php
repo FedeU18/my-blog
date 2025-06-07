@@ -87,11 +87,10 @@ class PostController extends Controller
   /**
    * Display the specified resource.
    */
-  public function getPostById(string $id)
+  public function show(Post $post)
   {
-    // Here you would typically fetch the post by ID from the database.
-    // For now, we'll just return a view with the post ID.
-    return view('post.show', ['id' => $id]);
+    $post->load('comments'); // Esto asegura que los comentarios se carguen correctamente
+    return view('post.show', compact('post'));
   }
 
   /**

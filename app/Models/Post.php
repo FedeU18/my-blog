@@ -24,4 +24,8 @@ class Post extends Model
       set: fn($value) => strtolower($value)
     );
   }
+  public function comments()
+  {
+    return $this->hasMany(Comment::class);
+  }
 }
