@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class PostController extends Controller
 {
@@ -35,10 +36,56 @@ class PostController extends Controller
   /**
    * Store a newly created resource in storage.
    */
+
+
+
+
+
+
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'title' => 'required|string|max:255',
+      'content' => 'required|string',
+      'image' => 'nullable|image|max:2048', // Permite imágenes opcionales
+    ]);
+
+    $imageUrl = null; // Inicializa la variable de la imagen
+
+    // Subir la imagen a ImgBB si existe
+    if ($request->hasFile('image')) {
+      $imageFile = $request->file('image')->path();
+
+      // Hacer la solicitud a ImgBB
+      $response = Http::attach(
+        'image',
+        file_get_contents($imageFile),
+        $request->file('image')->getClientOriginalName()
+      )->post("https://api.imgbb.com/1/upload", [
+        'key' => env('IMGBB_API_KEY'),
+        'expiration' => 600 // Puedes modificar el tiempo de expiración si lo deseas
+      ]);
+
+      // Si la respuesta es exitosa, obtener la URL de la imagen
+      if ($response->successful()) {
+        $imageUrl = $response->json('data.url');
+      } else {
+        return back()->withErrors(['image' => 'Error al subir la imagen a ImgBB.']);
+      }
+    }
+
+    // Guardar el post en la base de datos
+    $post = new Post();
+    $post->title = $request->title;
+    $post->content = $request->content;
+    $post->user_id = Auth::id();
+    $post->image = $imageUrl; // Guarda la URL de ImgBB
+
+    $post->save();
+
+    return redirect()->route('home-auth')->with('success', 'Post creado correctamente.');
   }
+
 
   /**
    * Display the specified resource.

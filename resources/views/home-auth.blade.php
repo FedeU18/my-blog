@@ -17,9 +17,10 @@
                 <div class="border p-4 rounded-md mb-4 bg-white">
                     <h2 class="text-xl font-semibold">{{ $post->title }}</h2>
                     <p>{{ $post->content }}</p>
+
                     @if ($post->image)
-                        <img src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
-                            class="mt-2 w-full max-w-sm" />
+                        <img src="{{ $post->image }}" alt="{{ $post->title }}"
+                            class="mt-2 w-full max-w-sm rounded-md shadow" />
                     @endif
                 </div>
             @endforeach
