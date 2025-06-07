@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -9,9 +11,17 @@ class PostController extends Controller
   /**
    * Display a listing of the resource.
    */
+
   public function index()
   {
-    return view('post.index');
+    $posts = Post::all(); // Recupera todos los posts
+    return view('home', compact('posts'));
+  }
+
+  public function getPosts()
+  {
+    $posts = Post::all(); // Recupera todos los posts
+    return view('home-auth', compact('posts'));
   }
 
   /**
