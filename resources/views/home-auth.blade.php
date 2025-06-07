@@ -11,6 +11,8 @@
             @else
                 @foreach ($posts as $post)
                     <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full">
+                        <p class="!text-sm dark:text-gray-400">{{ $post->user->name }}</p>
+
                         <h2 class="!text-2xl mt-4">
                             <a href="{{ route('posts.show', $post->id) }}" class="text-indigo-500 hover:underline">
                                 {{ $post->title }}
