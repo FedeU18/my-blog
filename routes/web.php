@@ -20,8 +20,8 @@ Route::get('/posts/create', [PostController::class, 'create'])->middleware(['aut
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 
 
-Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
-Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/posts/{post}', [PostController::class, 'show'])->middleware(['auth', 'verified'])->name('posts.show');
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->middleware(['auth', 'verified'])->name('comments.store');
 
 Route::middleware('auth')->group(function () {
   Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

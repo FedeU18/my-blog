@@ -54,16 +54,16 @@
         <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
             <div class="container w-full text-white flex flex-col gap-4 p-4 lg:p-8">
                 @foreach ($posts as $post)
-                    <div class="post border border-gray-300 dark:border-gray-700 p-4 rounded-lg shadow-lg w-full">
-                        <h2 class="">{{ $post->title }}</h2>
-                        <p>{{ $post->content }}</p>
-                        <p class="text-sm text-gray-500">Publicado por: {{ $post->user->name }}</p>
-                        @if ($post->image)
-                            <img src="{{ $post->image }}" alt="{{ $post->title }}"
-                                class="mt-2 w-full max-w-sm rounded-md shadow" />
-                        @endif
+                    <div class="post border-b border-gray-300 dark:border-gray-700 p-4 my-5 shadow-lg w-full">
+                        <p class="!text-sm dark:text-gray-400">{{ $post->user->name }}</p>
+                        <h2 class="!text-2xl mt-4">
+                            <a href="{{ route('posts.show', $post->id) }}" class="text-indigo-500 hover:underline">
+                                {{ $post->title }}
+                            </a>
+                        </h2>
                     </div>
                 @endforeach
+
             </div>
         </main>
     </div>

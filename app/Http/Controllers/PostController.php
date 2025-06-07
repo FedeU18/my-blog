@@ -60,7 +60,7 @@ class PostController extends Controller
         $request->file('image')->getClientOriginalName()
       )->post("https://api.imgbb.com/1/upload", [
         'key' => env('IMGBB_API_KEY'),
-        'expiration' => 600 // Puedes modificar el tiempo de expiración si lo deseas
+        // Puedes modificar el tiempo de expiración si lo deseas
       ]);
 
       // Si la respuesta es exitosa, obtener la URL de la imagen
