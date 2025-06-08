@@ -1,8 +1,7 @@
 @extends('layouts.app')
-
+@section('title', $post->title)
 @section('content')
-    <div
-        class="w-full mx-auto py-12 text-white border border-gray-300 dark:border-gray-700 p-6 rounded-lg shadow-lg bg-gray-900">
+    <div class="w-full mx-auto py-12 text-white mt-6 p-6 rounded-lg shadow-lg bg-gray-900">
         <h1 class="text-3xl font-bold">{{ $post->title }}</h1>
         <h3 class="text-xl text-gray-400 mt-2">Publicado por: {{ $post->user->name }}</h3>
 

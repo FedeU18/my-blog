@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Editar Post')
+
 @section('content')
     <div
         class="max-w-4xl mx-auto py-12 text-white border border-gray-300 dark:border-gray-700 p-6 rounded-lg dark:shadow-lg bg-gray-900">

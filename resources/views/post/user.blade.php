@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Mis Publicaciones')
 @section('content')
     <div class="w-full text-white">
         <h1 class="pt-5 font-bold text-3xl">Mis publicaciones</h1>
