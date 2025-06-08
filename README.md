@@ -84,20 +84,20 @@ php artisan serve
 
 ### 🔹 **Página de Inicio**
 
-> 📷 ![Home Page](public/images/home.png)
+> ![Home Page](public/images/home.png)
 
 ### 🔹 **Creación de un Post**
 
-> 📷 ![Formulario](public/images/formulario.png)
+> ![Formulario](public/images/formulario.png)
 
 ### 🔹 **Vista de un Post**
 
-> 📷 ![Post Detallado](public/images/detalle.png)
+> ![Post Detallado](public/images/detalle.png)
 
 ### 🔹 **Comentarios en un Post**
 
-> 📷 ![Comentarios](public/images/comentarios.png)
+> ![Comentarios](public/images/comentarios.png)
 
 ### 🔹 **Edición de Perfil**
 
-> 📷 ![Editar Perfil](public/images/perfil.png)
+> ![Editar Perfil](public/images/perfil.png)
