@@ -42,8 +42,8 @@ Este proyecto es un **blog dinámico** desarrollado con **Laravel**, utilizando 
 ### 1️⃣ Clonar el repositorio
 
 ```bash
-git clone https://github.com/TuUsuario/TuProyecto.git
-cd TuProyect
+git clone https://github.com/FedeU18/my-blog
+cd my-blog
 ```
 
 ### 2️⃣ Instalar dependencia
